@@ -20,10 +20,7 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(str) {
-  return {
-    string: ` ${str}`,
-    length: `${str.length}`,
-  };
+  return str ? str.length : 0;
 }
 
 getStringLength('Hello, world!');
@@ -42,10 +39,7 @@ getStringLength('Hello, world!');
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  if (typeof value !== 'string') {
-    throw new Error('ожидается строка');
-  }
-  return true;
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
