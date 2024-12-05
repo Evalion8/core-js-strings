@@ -304,9 +304,10 @@ reverseString('abcdef');
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  return str.split('').sort().join('');
 }
+orderAlphabetically('webmaster');
 
 /**
  * Checks if a given string contains a specified substring.
@@ -320,9 +321,10 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substr) {
+  return str.includes(substr);
 }
+containsSubstring('Hello ,world!');
 
 /**
  * Returns the number of vowels in the string.
@@ -338,9 +340,20 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  let vowelsCounter = 0;
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
+  const splittedString = [...str];
+
+  for (let i = 0; i < splittedString.length; i += 1) {
+    if (vowels.includes(splittedString[i])) {
+      vowelsCounter += 1;
+    }
+  }
+  return vowelsCounter;
 }
+
+countVowels('apple');
 
 /**
  * Returns true if the string is a palindrome; otherwise false.
@@ -355,9 +368,10 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  return str === str.split('').reverse().join('');
 }
+isPalindrome('madam');
 
 /**
  * Find the longest word in the sentence. If there are multiple longest words,
@@ -371,9 +385,14 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(str) {
+  const longestWord = str.split(' ').reduce((longest, currentWord) => {
+    return currentWord.length > longest.length ? currentWord : longest;
+  }, '');
+  return longestWord;
 }
+
+findLongestWord('The quick brown fox');
 
 /**
  * Returns the string where each word is reversed.
@@ -385,9 +404,10 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str.split('').reverse().join('');
 }
+reverseWords('The Quick Brown Fox');
 
 /**
  * Inverts the case of each character in the given string.
@@ -417,9 +437,10 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
+getStringFromTemplate('John', 'Doe');
 
 /**
  * Extracts a name from template string 'Hello, First_Name Last_Name!'.
