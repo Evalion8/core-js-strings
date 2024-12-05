@@ -452,10 +452,15 @@ getStringFromTemplate('John', 'Doe');
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value
+    .split(' ')
+    .slice(1)
+    .map((item) => item.replace(/!$/, ''))
+    .join(' ');
 }
 
+extractNameFromTemplate('Hello, John Doe!');
 /**
  * Remove the first and last angle brackets from tag string
  *
@@ -467,9 +472,14 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(tag) {
+  if (tag.startsWith('<') && tag.endsWith('>')) {
+    return tag.slice(1, -1);
+  }
+  return tag;
 }
+
+unbracketTag('<span>');
 
 /**
  * Extracts e-mails from single string with e-mails list delimited by semicolons
@@ -486,10 +496,12 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';').map((email) => email.trim());
 }
-
+extractEmails(
+  'angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com'
+);
 /**
  * Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
@@ -506,9 +518,17 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+
+function encodeToRot13(str) {
+  return str.replace(/[A-Za-z]/g, (char) => {
+    const base = char <= 'Z' ? 'A' : 'a';
+    return String.fromCharCode(
+      ((char.charCodeAt(0) - base.charCodeAt(0) + 13) % 26) + base.charCodeAt(0)
+    );
+  });
 }
+
+encodeToRot13('hello');
 
 /**
  * Returns playid card id.
@@ -534,9 +554,65 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const deck = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+
+  return deck.indexOf(value);
 }
+getCardId('Q♠');
 
 module.exports = {
   getStringLength,
