@@ -54,10 +54,9 @@ function isString(value) {
  *   concatenateStrings('aa', '') => 'aa'.
  *   concatenateStrings('', 'bb') => 'bb'
  */
-function concatenateStrings(value1, value2) {
-  return value1 + value2;
+function concatenateStrings(str1, str2) {
+  return str1 + str2;
 }
-concatenateStrings('Hello, ', 'World!');
 
 /**
  * Returns the first character of the given string.
@@ -70,9 +69,8 @@ concatenateStrings('Hello, ', 'World!');
  *   getFirstChar('cat') => 'c'
  *   getFirstChar('') => ''
  */
-function getFirstChar() {
-  const string = 'Hello , world!';
-  return string[0];
+function getFirstChar(str) {
+  return str.charAt(0);
 }
 
 /**
@@ -86,9 +84,8 @@ function getFirstChar() {
  *   removeLeadingAndTrailingWhitespaces('cat ') => 'cat'
  *   removeLeadingAndTrailingWhitespaces('\t\t\tHello, World! ') => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces() {
-  const string = '  Abracadabra';
-  return string.trim();
+function removeLeadingAndTrailingWhitespaces(str) {
+  return str.trim();
 }
 /**
  * Removes only leading whitespace characters from the string.
@@ -102,10 +99,8 @@ function removeLeadingAndTrailingWhitespaces() {
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
 
-function removeLeadingWhitespaces() {
-  const phrase = '   hello world. ';
-  const trimmedPhrase = phrase.trimStart();
-  return trimmedPhrase;
+function removeLeadingWhitespaces(str) {
+  return str.trimStart();
 }
 
 /**
@@ -119,10 +114,8 @@ function removeLeadingWhitespaces() {
  *   removeTrailingWhitespaces('cat ') => 'cat'
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
-function removeTrailingWhitespaces() {
-  const phrase = '   hello world. ';
-  const trimmedPhrase = phrase.trimEnd();
-  return trimmedPhrase;
+function removeTrailingWhitespaces(value) {
+  return value.trimEnd();
 }
 
 /**
@@ -138,11 +131,15 @@ function removeTrailingWhitespaces() {
  *   repeatString('', 3) => ''
  *   repeatString('abc', -2) => ''
  */
-function repeatString(count) {
-  const stringRepeated = 'Mommy';
-  return `${stringRepeated} , ${count}`.repeat(count);
-}
 
+function repeatString(str, times) {
+  if (!str || times <= 0) {
+    return '';
+  }
+
+  return str.repeat(times);
+}
+repeatString('A', 5);
 /**
  * Remove the first occurrence of a substring from a string.
  *
@@ -190,7 +187,7 @@ function removeLastOccurrences(str, substr) {
   return newStr;
 }
 
-removeLastOccurrences('To be or not to be', 'to be');
+removeLastOccurrences('I like legends', 'end');
 
 /**
  * Calculate the sum of character codes of the given string.
@@ -205,11 +202,12 @@ removeLastOccurrences('To be or not to be', 'to be');
  *   sumOfCodes() => 0
  */
 
-function sumOfCodes(inputString) {
+function sumOfCodes(str) {
   let sum = 0;
-  for (let i = 0; i < inputString.length; i += 1) {
-    sum += inputString.charCodeAt(i);
-  }
+  if (str)
+    for (let i = 0; i < str.length; i += 1) {
+      sum += str.charCodeAt(i);
+    }
   return sum;
 }
 
@@ -399,7 +397,12 @@ findLongestWord('The quick brown fox');
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-  return str.split('').reverse().join('');
+  return str
+    .split(' ')
+
+    .map((word) => word.split('').reverse().join(''))
+
+    .join(' ');
 }
 reverseWords('The Quick Brown Fox');
 
@@ -414,8 +417,19 @@ reverseWords('The Quick Brown Fox');
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  return str
+    .split('')
+    .map((char) => {
+      if (char === char.toUpperCase()) {
+        return char.toLowerCase(); //
+      }
+      if (char === char.toLowerCase()) {
+        return char.toUpperCase(); //
+      }
+      return char;
+    })
+    .join('');
 }
 
 /**
